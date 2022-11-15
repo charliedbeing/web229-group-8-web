@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 
 export class AuthService {
-  endpoint: string = 'http://localhost:4000/api';
+  endpoint: string = 'http://localhost:8000/auth';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
@@ -32,10 +32,11 @@ export class AuthService {
       .post<any>(`${this.endpoint}/signin`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
-        this.getUserProfile(res._id).subscribe((res) => {
-          this.currentUser = res;
-          this.router.navigate(['user-profile/' + res.msg._id]);
-        });
+        this.router.navigate(['survey-list/']);
+        // this.getUserProfile(res._id).subscribe((res) => {
+        //   this.currentUser = res;
+        //   this.router.navigate(['survey-list/']);
+        // });
       });
   }
 
