@@ -11,6 +11,8 @@ import { RouterModule } from '@angular/router';
 import { SurveyListComponent} from './survey-list/survey-list.component';
 import { AddSurveyComponent } from './add-survey/add-survey.component';
 import { SurveyDetailComponent} from './survey-detail/survey-detail.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 
 @NgModule({   
@@ -24,7 +26,9 @@ import { SurveyDetailComponent} from './survey-detail/survey-detail.component';
     SurveyComponent,
     SurveyListComponent,
     AddSurveyComponent,
-    SurveyDetailComponent
+    SurveyDetailComponent,
+    SigninComponent,
+    SignupComponent
 
 
   ],
