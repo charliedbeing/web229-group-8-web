@@ -14,9 +14,10 @@ import { Router } from '@angular/router';
 })
 
 export class AuthService {
+  
   endpoint: string = 'http://localhost:8000/auth';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
+  currentUser:User = {};
 
   constructor(private http: HttpClient, public router: Router) {}
 
@@ -33,12 +34,18 @@ export class AuthService {
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
         this.router.navigate(['survey-list/']);
-        // this.getUserProfile(res._id).subscribe((res) => {
-        //   this.currentUser = res;
-        //   this.router.navigate(['survey-list/']);
-        // });
+        
+        this.getUserProfile(res._id).subscribe((res) => {
+          this.currentUser = res;
+          // this.router.navigate(['survey-list/']);
+        });
+
       });
   }
+
+  getCurrentUser(){
+    return this.currentUser;
+  }  
 
   getToken() {
     return localStorage.getItem('access_token');

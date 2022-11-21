@@ -12,7 +12,13 @@ import {SurveyDetailComponent} from './pages/survey-detail/survey-detail.compone
 
 import {SigninComponent} from './pages/auth/signin/signin.component'
 import {SignupComponent} from './pages/auth/signup/signup.component';
-import {AuthGuard} from './shared/auth.guard'
+import {AuthGuard} from './shared/auth.guard';
+
+
+import {AdminComponent} from './pages/admin/admin.component';
+import { CenterComponent }from './pages/admin/center/center.component';
+import { EditComponent } from './pages/admin/edit/edit.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { title: 'Home' } },
@@ -26,8 +32,24 @@ const routes: Routes = [
 
   { path: 'log-in', component: SigninComponent },
   { path: 'sign-up', component: SignupComponent },
+  
+  {
+    path:'admin',
+    component:AdminComponent,
+    canActivate:[AuthGuard],
+    children:[
+      {
+        path:'',
+        children:[
+          {path:'center',component:CenterComponent},
+          {path:'edit/:id', component:EditComponent}
+        ]
+      }
+    ]
+  }
 
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

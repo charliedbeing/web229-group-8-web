@@ -1,6 +1,6 @@
 export class QuestionModel {
-    title:String | undefined; 
-    type:QuestionType | undefined;  
+    title!: String; 
+    type!: QuestionType;  
     options?:any[]; //answer's option
     answer:any;    //questions' answer
   }

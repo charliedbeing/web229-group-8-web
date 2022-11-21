@@ -14,10 +14,34 @@ import { SurveyDetailComponent} from './survey-detail/survey-detail.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 
+import { AdminComponent } from './admin/admin.component';
+import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
+
+
+import {QuestionCheckboxComponent} from './question/shared/question-checkbox/question-checkbox.component';
+import {QuestionRadioComponent} from './question/shared/question-radio/question-radio.component';
+import {QuestionScoreComponent} from './question/shared/question-score/question-score.component';
+import {QuestionTextComponent} from './question/shared/question-text/question-text.component';
+
+
+
+import { SurveyControlsComponent} from './admin/center/shared/survey-controls/survey-controls.component';
+import {SurveyDetaillComponent} from './admin/center/shared/survey-detail/survey-detail.component';
+import {SurveyItemComponent} from './admin/center/shared/survey-item/survey-item.component';
+import { CenterComponent } from './admin/center/center.component';
+
+import { QuestionSelectComponent} from './admin/edit/shared/question-select/question-select.component';
+import { SurveyOutlineComponent } from './admin/edit/shared/survey-outline/survey-outline.component';
+import { EditComponent } from './admin/edit/edit.component';
+
+import { TabsModule } from 'ngx-bootstrap/tabs'
 
 @NgModule({   
   imports:[CommonModule,BrowserModule,FormsModule,PartialsModule,
-    RouterModule,ReactiveFormsModule 
+    ReactiveFormsModule,
+    RouterModule,
+    TabsModule.forRoot(),
+
   ],
   declarations: [
     AboutComponent,
@@ -25,11 +49,30 @@ import { SignupComponent } from './auth/signup/signup.component';
     ContactComponent,
     SurveyComponent,
     SurveyListComponent,
-    AddSurveyComponent,
     SurveyDetailComponent,
+    AddSurveyComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    AdminComponent,
+    
 
+    QuestionCheckboxComponent,
+    QuestionRadioComponent,
+    QuestionScoreComponent,
+    QuestionTextComponent,
+    QuestionnaireComponent,
+
+    // 
+    CenterComponent,
+    SurveyControlsComponent,
+    SurveyDetaillComponent,
+    SurveyItemComponent,
+
+    // 
+  
+    SurveyOutlineComponent,
+    QuestionSelectComponent,
+    EditComponent,
 
   ],
   exports: [
@@ -40,7 +83,23 @@ import { SignupComponent } from './auth/signup/signup.component';
     PartialsModule,
     SurveyListComponent,
     AddSurveyComponent,
-    SurveyDetailComponent
+
+    QuestionCheckboxComponent,
+    QuestionRadioComponent,
+    QuestionScoreComponent,
+    QuestionTextComponent,
+
+    QuestionnaireComponent,
+
+    CenterComponent,
+    SurveyControlsComponent,
+    SurveyDetaillComponent,
+    SurveyItemComponent,
+    
+    SurveyOutlineComponent,
+    QuestionSelectComponent,
+    EditComponent,
+
     ]
 })
 export class PagesModule { }
