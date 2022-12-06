@@ -1,12 +1,11 @@
-<div class="row edit-container">
-    <p>this is in edit sub</p>
+<div  class="row edit-container">
     <div class="col-lg-3">
         <div class="sidebar">
             <tabset type="tabs">
-                <tab heading="问题控件">
+                <tab heading="Question">
                     <question-select (addQuestionRequest)="onAddQuestion($event)"></question-select>
                 </tab>
-                <tab heading="问卷大纲">
+                <tab heading="Questionnaire outline">
                     <questionnaire-outline [questionnaire]="questionnaire"></questionnaire-outline>
                 </tab>
             </tabset>

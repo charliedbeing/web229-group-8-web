@@ -26,7 +26,7 @@ export class EditComponent implements OnInit {
   ) { 
     //init an empty questionnaire object
     this.questionnaire ={
-      id:'',
+      _id:'',
       title:'',
       starter:'',
       ending:'',
@@ -34,7 +34,7 @@ export class EditComponent implements OnInit {
       questionList:[],
       userId: userService.getCurrentUser()['id'],
       createDate:new Date().toISOString(),
-      collectionDate:[],
+      collectionData:[],
     }
   }
 
@@ -59,24 +59,24 @@ export class EditComponent implements OnInit {
       case QuestionType.Text:
       case QuestionType.Score:
         this.questionnaire.questionList?.push({
-          title: '问题标题',
+          title: 'Question Title',
           type: type,
           answer: ''
         });
         break;
       case QuestionType.SingleSelect:
         this.questionnaire.questionList?.push({
-          title: '问题标题-ss',
+          title: 'Question Title',
           type: type,
-          options: [{'key': 0, 'value': '选项1'}],
+          options: [{'key': 0, 'value': 'option1'}],
           answer:''
         });
         break;
       case QuestionType.MultiSelect:
         this.questionnaire.questionList?.push({
-          title: '问题标题-ms',
+          title: 'Question Title',
           type: type,
-          options: [{'key': 0, 'value': '选项1'}],
+          options: [{'key': 0, 'value': 'option1'}],
           answer:{}
         });
         break;
@@ -86,7 +86,7 @@ export class EditComponent implements OnInit {
   onSubmitQuestionniare(questionnaire: QuestionnaireModel) {
     //保存问卷或回收答案
     let ref = this;
-    if (questionnaire.state === QuestionnaireState.Created) {
+    if (questionnaire.state == QuestionnaireState.Created) {
       if (this.id && this.id !== '0') {
 
          //edit created and not published

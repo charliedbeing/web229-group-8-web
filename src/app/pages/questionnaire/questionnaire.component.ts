@@ -21,7 +21,7 @@ export class QuestionnaireComponent implements OnInit {
   ngOnInit() {
     this.editable = false;
     this.questionnaire = this.questionnaire || {
-      id:'',
+      _id:'',
       title:'',
       starter:'',
       ending:'',
@@ -29,10 +29,11 @@ export class QuestionnaireComponent implements OnInit {
       questionList:[],
       userId: '',
       createDate:new Date().toISOString(),
-      collectionDate:[],
+      collectionData:[],
     }
 
-    // this.editable = this.questionnaire && this.questionnaire.state === QuestionnaireState.Created;
+     this.editable = this.questionnaire && this.questionnaire.state === QuestionnaireState.Created;
+     
     if(this.questionnaire){
       this.questionnaire.userId= "";
     }

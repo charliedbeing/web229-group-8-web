@@ -24,20 +24,19 @@ export class QuestionCheckboxComponent extends QuestionComponent implements OnIn
   ngOnInit() {
     
     this.copyQuestion();
-    this.question.options= this.question.options|| [];
+    let options = this.question.options|| [];
 
-    if(this.question){
-
-      if(this.question.options){
-        this.key = this.question.options[this.question.options.length-1].key;
-        if(!this.question.answer.selected){
-          this.question.answer.selected = [];
-        }  
-      }
-     
+    if(options.length ==0){
+      this.key =0;
+    }else if(options.length >0){
+      this.key = options[options.length-1].key;
     }
+   
+      
+    if(!this.question.answer.selected){
+          this.question.answer.selected = [];
+    }  
 
-	
 	}
 
   onDeleteOption(index: number) {
@@ -53,9 +52,13 @@ export class QuestionCheckboxComponent extends QuestionComponent implements OnIn
   }
 
   onAddOption() {
-    if(this.key){
-      this.question?.options?.push({key:  ++ this.key, value:'' });
+
+    if(this.key != undefined){
+      if(this.key >= 0){
+        this.question?.options?.push({key:  ++ this.key, value:'' });
+      }
     }
+   
   
   }
 

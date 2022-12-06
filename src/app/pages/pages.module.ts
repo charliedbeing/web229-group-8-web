@@ -34,7 +34,8 @@ import { QuestionSelectComponent} from './admin/edit/shared/question-select/ques
 import { SurveyOutlineComponent } from './admin/edit/shared/survey-outline/survey-outline.component';
 import { EditComponent } from './admin/edit/edit.component';
 
-import { TabsModule } from 'ngx-bootstrap/tabs'
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { PublishedComponent } from './published/published.component'
 
 @NgModule({   
   imports:[CommonModule,BrowserModule,FormsModule,PartialsModule,
@@ -73,6 +74,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs'
     SurveyOutlineComponent,
     QuestionSelectComponent,
     EditComponent,
+    PublishedComponent,
 
   ],
   exports: [

@@ -1,19 +1,19 @@
 
 <table *ngIf="questionnaire" class="table">
     <tr>
-        <td>问卷标题：</td>
+        <td>Questionnaire Title：</td>
         <td>{{questionnaire.title}}</td>
     </tr>
     <tr>
-        <td>问卷简介：</td>
+        <td>Questionnaire Start：</td>
         <td>{{questionnaire.starter}}</td>
     </tr>
     <tr>
-        <td>问题总数：</td>
+        <td>Question Amount：</td>
         <td>{{questionnaire.questionList?.length}}</td>
     </tr>
     <tr>
-        <td>创建时间：</td>
+        <td>Create Time：</td>
         <td>{{questionnaire.createDate}}</td>
     </tr>
 </table>

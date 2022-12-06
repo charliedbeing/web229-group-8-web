@@ -19,6 +19,8 @@ import {AdminComponent} from './pages/admin/admin.component';
 import { CenterComponent }from './pages/admin/center/center.component';
 import { EditComponent } from './pages/admin/edit/edit.component';
 
+import { PublishedComponent} from './pages/published/published.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { title: 'Home' } },
@@ -46,7 +48,11 @@ const routes: Routes = [
         ]
       }
     ]
-  }
+  },
+  {
+    path: 'published/:id',
+    component: PublishedComponent
+}
 
 ];
 

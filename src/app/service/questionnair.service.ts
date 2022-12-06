@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class QuestionnairService {
  
-  REST_API: string = 'https://web-229-group-9-server.herokuapp.com/survey-api';
+  //https://web-229-group-9-server.herokuapp.com
+  REST_API: string = 'http://localhost:8000/questionnaire-api';
 
   // Http Header
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
@@ -20,7 +21,14 @@ export class QuestionnairService {
 
   // Add questionnaire Questionnaire
   AddQuestionnair(data: QuestionnaireModel): Observable<any> {
-    let API_URL = `${this.REST_API}/questionnaire`;
+    let API_URL = `${this.REST_API}/add-questionnaire`;
+
+    console.log('--to -server--- ');
+    console.log(data);
+
+    
+    delete data._id;
+    
     return this.httpClient
       .post(API_URL, data)
       .pipe(catchError(this.handleError));
@@ -30,7 +38,7 @@ export class QuestionnairService {
   GetQuestionnaires() {
     return this.httpClient.get(`${this.REST_API}/questionnaires`)
     .pipe(
-      map((res:any)=><QuestionnaireModel[]> res.data),
+      map((res:any)=><QuestionnaireModel[]> res),
       catchError(this.handleError)
     );
   }
@@ -56,6 +64,10 @@ export class QuestionnairService {
 
    // Update
    updateQuestionnaireState(id: any, data: any): Observable<any> {
+
+    console.log(data);
+
+
     let API_URL = `${this.REST_API}/questionnaire/${id}`;
     return this.httpClient
       .put(API_URL, data, { headers: this.httpHeaders })

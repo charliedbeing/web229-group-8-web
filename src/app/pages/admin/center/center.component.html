@@ -1,12 +1,12 @@
-<div class="center-container" *ngIf="isEmpty">
+<div style="margin-left:20% ; margin-right:20%" class="center-container" *ngIf="isEmpty">
     <div class="show-empty">
-        尚未创建任何问卷，马上<a [routerLink]="['/admin/edit/0']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">创建一个</a>吧！
+        Have not Created any Questionnaire，<a [routerLink]="['/admin/edit/0']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">create it</a> right now!
     </div>
 </div>
-<div class="row center-container" *ngIf="!isEmpty">
+<div style="margin-left:20% ; margin-right:20%" class="row center-container" *ngIf="!isEmpty">
     <div class="col-lg-7">
         <div class="panel panel-default">
-            <div class="panel-heading">问卷列表</div>
+            <div class="panel-heading">Questionnaire List</div>
             <div class="list-group">
                 <a class="list-group-item questionnaire-item" *ngFor="let item of questionnaires;let i=index;"
                     (click)="onSelect(item, i)" [class.active]="item===selectedQuestionnaire">
@@ -17,13 +17,13 @@
     </div>
     <div class="col-lg-5">
         <div class="panel panel-default">
-            <div class="panel-heading">问卷详情</div>
+            <div class="panel-heading">Questionnaire Detail</div>
             <div class="panel-body">
                 <survey-detail [questionnaire]="selectedQuestionnaire"></survey-detail>
             </div>
         </div>
          <div class="panel panel-default">
-            <div class="panel-heading">问卷管理</div>
+            <div class="panel-heading">Questionnaire</div>
             <div class="panel-body">
                 <survey-controls [questionnaire]="selectedQuestionnaire"
                     (deleteQuestionnaire)="onDeleteQuestionnaire()" 

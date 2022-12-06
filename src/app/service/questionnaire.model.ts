@@ -1,22 +1,16 @@
 import {QuestionModel} from './question.model'
 // data modle define
 export class QuestionnaireModel{
-    userId?:string; // each user has own questionnaire
-    id!:string; 
-    title!: string; 
-    starter!:string; 
-    ending!:string;  
+    userId?:String; // each user has own questionnaire
+    _id?:String; 
+    title!: String; 
+    starter!:String; 
+    ending!:String;  
     state?:QuestionnaireState; 
     questionList?: QuestionModel[];  
-    createDate?:string; 
-    expireDate?:string;
-    collectionDate?: Array <
-    {
-      version?:string;
-      endDate?:string;
-      data?:Array<QuestionModel[]>
-    }
-    > ;
+    createDate?:String; 
+    expireDate?:String;
+    collectionData!: QuestionModel[][];
 
   }
   

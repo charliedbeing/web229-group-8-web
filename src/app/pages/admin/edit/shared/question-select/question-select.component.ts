@@ -12,10 +12,10 @@ export class QuestionSelectComponent implements OnInit {
 
   constructor() {
     this.controls = [
-      {type: QuestionType.Text, label: '文本问题', iconClass: 'icon-text'},
-      {type: QuestionType.SingleSelect, label: '单选问题', iconClass: 'icon-radio'},
-      {type: QuestionType.MultiSelect, label: '多选问题', iconClass: 'icon-checkbox'},
-      {type: QuestionType.Score, label: '分值问题', iconClass: 'icon-star'}
+      {type: QuestionType.Text, label: 'Text', iconClass: 'icon-text'},
+      {type: QuestionType.SingleSelect, label: 'Single-Select', iconClass: 'icon-radio'},
+      {type: QuestionType.MultiSelect, label: 'Multi-Select', iconClass: 'icon-checkbox'},
+      {type: QuestionType.Score, label: 'Score ', iconClass: 'icon-star'}
     ];
    }
 

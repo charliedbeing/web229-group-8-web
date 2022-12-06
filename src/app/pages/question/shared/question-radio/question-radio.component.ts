@@ -21,8 +21,13 @@ export class QuestionRadioComponent extends QuestionComponent implements OnInit{
 
    ngOnInit() {
     this.copyQuestion();
-    this.question.options = this.question.options || [];
-    this.key = this.question.options[this.question.options.length-1].key;
+    let options = this.question.options || [];
+    if(options.length>0){
+      this.key =options[options.length-1].key;
+    }else if(options.length ==0){
+      this.key =0;
+    }
+    
    
    
   }
@@ -37,9 +42,16 @@ export class QuestionRadioComponent extends QuestionComponent implements OnInit{
   }
 
   onAddOption() {
-    if(this.key){
-      this.question.options?.push({key: ++ this.key, value:'' });
+
+
+    if(this.key != undefined){
+      if(this.key>=0){
+        this.question.options?.push({key: ++ this.key, value:'' });
+      }
     }
+  
+    
+
     
   }
 

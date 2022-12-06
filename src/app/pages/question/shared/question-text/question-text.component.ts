@@ -6,23 +6,13 @@ import { QuestionModel } from '../../../../service/question.model';
   templateUrl: './question-text.component.html',
   styleUrls: ['./question-text.component.css']
 })
-export class QuestionTextComponent extends QuestionComponent implements OnInit {
+export class QuestionTextComponent extends QuestionComponent  {
  
    @Input()
   override question: QuestionModel = new QuestionModel;
    @Input()
   override editable: boolean = false;
    @Output() override deleteQuestionRequest: EventEmitter<any> = new EventEmitter();
-
-
-  constructor() { 
-    super();
-  }
-
-  ngOnInit(): void {
-    this.copyQuestion();
-  }
-
 
 
 }
