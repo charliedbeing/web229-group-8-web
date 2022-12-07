@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { QuestionnaireModel,QuestionnaireState } from '../../service/questionnaire.model';
 import { QuestionnairService } from '../../service/questionnair.service';
 import { isNgTemplate } from '@angular/compiler';
 import { SurveyControlsComponent } from '../admin/center/shared/survey-controls/survey-controls.component';
+import { QuestionModel } from 'src/app/service/question.model';
 @Component({
   selector: 'app-published',
   templateUrl: './published.component.html',
@@ -14,7 +16,10 @@ export class PublishedComponent implements OnInit {
    questionnaire: QuestionnaireModel;
     id: string;
 
-  constructor(private questionnaireService:QuestionnairService, private activatedRoute:ActivatedRoute, private router: Router)
+  constructor(private questionnaireService:QuestionnairService,
+     private activatedRoute:ActivatedRoute,
+      private router: Router,
+      private location: Location)
    {
      this.questionnaire = new QuestionnaireModel();
      this.id = "1";
@@ -25,7 +30,12 @@ export class PublishedComponent implements OnInit {
     if (this.id && this.id !== '0') {
       this.questionnaireService.GetQuestionnaireById(this.id)
         .subscribe(
-          questionnaire => this.questionnaire = questionnaire,
+ 
+          questionnaire =>{
+       
+            this.questionnaire = questionnaire;
+            this.initData();
+          } ,
           error => console.log(error)
         );
     }
@@ -50,7 +60,6 @@ export class PublishedComponent implements OnInit {
         
          // collectate questionnaire data
         if(this.questionnaire.state ==1){
-          console.log("enter here ???")
           this.collecteData();
           this.questionnaireService.updateQuestionnaire(this.id,this.questionnaire)
           .subscribe(
@@ -71,18 +80,43 @@ export class PublishedComponent implements OnInit {
 
 
   private  collecteData():void{
-   
   
     if(this.questionnaire.questionList != undefined){
  
       this.questionnaire.collectionData.push(this.questionnaire.questionList);
     
     }
-    
-     
+  }
 
-    console.log(this.questionnaire);
+  // title!: String; 
+  // type!: QuestionType;  
+  // options?:any[]; //answer's option
+  // answer:any;    //questions' answer
+
+  private  initData():void{
+  
+    if(this.questionnaire.questionList != undefined){
  
+      for(var i =0; i< this.questionnaire.questionList.length;i++){
+        let answer = this.questionnaire.questionList[i].answer;
+        if(typeof answer =='string'){
+          this.questionnaire.questionList[i].answer ='';
+        }
+        if(typeof answer =='number'){
+          this.questionnaire.questionList[i].answer ='';
+        }
+        if(answer instanceof Object){
+          this.questionnaire.questionList[i].answer = [];
+        }
+      }
+    
+    }
+  }
+
+  onBack():void {
+    console.log('back');
+
+    this.location.back();
   }
 
   gotoCenter() {

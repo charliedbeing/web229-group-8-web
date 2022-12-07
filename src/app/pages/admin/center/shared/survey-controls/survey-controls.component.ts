@@ -13,8 +13,14 @@ export class SurveyControlsComponent implements OnInit ,OnChanges{
   questionnaire: QuestionnaireModel = new QuestionnaireModel;
   @Output() deleteQuestionnaire: EventEmitter<any> = new EventEmitter();
   @Output() publishQuestionnaire: EventEmitter<any> = new EventEmitter();
+  @Output() closeQuestionnaire: EventEmitter<any> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  canAnswer:boolean|undefined = false;
+  canPreview:boolean|undefined = false;
+
+  constructor(private router: Router) {
+
+   }
 
   ngOnInit(): void {
 
@@ -23,7 +29,21 @@ export class SurveyControlsComponent implements OnInit ,OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
 
-        // console.log(this.questionnaire.state);
+    if(this.questionnaire.state == 0){
+      this.canAnswer =false;
+      this.canPreview = true;
+    }
+
+    if(this.questionnaire.state == 1){
+      this.canAnswer =true;
+      this.canPreview = false;
+    }
+      
+    if(this.questionnaire.state == 2){
+      this.canAnswer =false;
+      this.canPreview = true;
+    }
+      
   }
 
 
@@ -44,6 +64,10 @@ export class SurveyControlsComponent implements OnInit ,OnChanges{
 
   onPublish(){
     this.publishQuestionnaire.emit();
+  }
+
+  onClose(){
+    this.closeQuestionnaire.emit();
   }
 
 }

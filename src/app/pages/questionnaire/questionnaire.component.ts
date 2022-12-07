@@ -17,6 +17,8 @@ export class QuestionnaireComponent implements OnInit {
 
 
   editable: boolean = false;
+  submitAvailable:boolean =false;
+  submitName:string="Submit";
 
   ngOnInit() {
     this.editable = false;
@@ -28,7 +30,7 @@ export class QuestionnaireComponent implements OnInit {
       state:QuestionnaireState.Created,
       questionList:[],
       userId: '',
-      createDate:new Date().toISOString(),
+      createDate:new Date(),
       collectionData:[],
     }
 
@@ -44,6 +46,22 @@ export class QuestionnaireComponent implements OnInit {
     if(this.questionnaire){
       console.log(this.questionnaire.questionList);
     }
+
+    //Edit Questionnaire Structure Submit
+      if(this.questionnaire != undefined){
+        if(this.questionnaire.state ==0){
+          this.submitAvailable = true;
+          this.submitName ="Edit Questionnaire Submit";
+        }
+        if(this.questionnaire.state ==1){
+          this.submitAvailable = true;
+          this.submitName ="Collect Data Submit";
+        }
+      }
+
+    // collect data submit 
+
+
       
   }
 

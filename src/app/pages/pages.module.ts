@@ -35,7 +35,9 @@ import { SurveyOutlineComponent } from './admin/edit/shared/survey-outline/surve
 import { EditComponent } from './admin/edit/edit.component';
 
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { PublishedComponent } from './published/published.component'
+import { PublishedComponent } from './published/published.component';
+
+import { StateStringPipe } from './../service/state.pipe';
 
 @NgModule({   
   imports:[CommonModule,BrowserModule,FormsModule,PartialsModule,
@@ -55,6 +57,7 @@ import { PublishedComponent } from './published/published.component'
     SigninComponent,
     SignupComponent,
     AdminComponent,
+    StateStringPipe,
     
 
     QuestionCheckboxComponent,

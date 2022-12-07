@@ -1,8 +1,14 @@
 <div class="row" *ngIf="questionnaire">
     <div class="col-lg-3">
-        <button type="button" class="btn btn-default btn-lg" (click)="onPreview()">
+        <button type="button" *ngIf="canPreview" class="btn btn-default btn-lg" (click)="onPreview()">
             <i class="bi bi-search"></i>
             <span class="control-text">Preview</span>
+        </button>
+    </div>
+    <div class="col-lg-3">
+        <button type="button" *ngIf="canAnswer" class="btn btn-default btn-lg" (click)="onPreview()">
+            <i class="bi bi-search"></i>
+            <span class="control-text">Answer </span>
         </button>
     </div>
     <div class="col-lg-3" *ngIf="questionnaire.state==0">
@@ -18,7 +24,7 @@
         </button>
     </div> 
     <div class="col-lg-3" *ngIf="questionnaire.state==1">
-        <button type="button" class="btn btn-default btn-lg">
+        <button type="button" class="btn btn-default btn-lg" (click)="onClose()">
             <span class="bi bi-bookmark-x"></span>
             <span class="control-text">Close</span>
         </button>

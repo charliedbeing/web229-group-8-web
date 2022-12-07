@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 import { QuestionnairService} from '../../../service/questionnair.service';
 import { QuestionnaireModel,QuestionnaireState } from '../../../service/questionnaire.model';
+import { Router } from '@angular/router';
+import { PreviousRouteServiceService} from '../../../service/previous-route-service.service';
 
 @Component({
   selector: 'app-center',
@@ -17,6 +19,8 @@ export class CenterComponent implements OnInit ,OnChanges{
   constructor(
     private cd:ChangeDetectorRef,
     private questionnaireService: QuestionnairService,
+    private router: Router,
+    private preurlService:PreviousRouteServiceService
 
   ) {
     this.selectedQuestionnaire = new QuestionnaireModel();
@@ -24,49 +28,45 @@ export class CenterComponent implements OnInit ,OnChanges{
 
   ngOnInit(): void {
 
-    // this.questionnaireService.GetQuestionnaires()
-    // .subscribe(
-    //   questionnaires => {
-    //     // 后端返回空对象或者空的Questionnaire数组
-    //     console.log(questionnaires.length)
-    //     // if(!questionnaires || questionnaires.length === 0){
-    //     //   this.isEmpty = true;
-    //     //   return;
-    //     // }
-    //     // this.isEmpty = false;
-    //     // this.questionnaires = questionnaires;
-    //     // this.selectedQuestionnaire = this.questionnaires[0];
-    //     // this.selectedIndex = 0;
-    //   },
-    //   error => console.error(error)
-    // );
-    
 
 
     this.questionnaireService.GetQuestionnaires().subscribe((res) => {
-      console.log(res);
-      console.log(typeof res);
-      
     
 
-      if(!this.questionnaires || this.questionnaires.length === 0){
+      if(res.length === 0){
         this.isEmpty = true;
         return
       }
       this.isEmpty =false;
       this.questionnaires = res;
-      this.selectedQuestionnaire = this.questionnaires[0];
-      this.selectedIndex =0;
+      let id = this.preurlService.getPreviousUrl().split("/")[2];
+      this.selectedQuestionnaire = this.questionnaires[this.getId(id)];
+      this.selectedIndex = 0;
 
     });
 
 
+    
+
+  }
+
+  private getId(id:string):number{
+    let result =0;
+
+    for(var i =0;i<this.questionnaires.length;i++){
+        if(id == this.questionnaires[i]._id){
+          result =i;
+          break;
+        }
+    }
+
+    return result;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
 
-   
 
+   
   }
 
   onSelect(questionnaire:QuestionnaireModel, index:number) {
@@ -114,7 +114,26 @@ export class CenterComponent implements OnInit ,OnChanges{
         },
         error => console.log(error)
       );
-}
+      }
+    }
+
+    onCloseQuestionnaire(){
+
+      if(this.selectedQuestionnaire!= undefined){
+        this.selectedQuestionnaire.state = QuestionnaireState.Finished;
+        this.questionnaireService.updateQuestionnaireState(this.selectedQuestionnaire._id, this.selectedQuestionnaire)
+        .subscribe(
+          questionnaire => {
+            if(this.selectedQuestionnaire!= undefined){
+              this.selectedQuestionnaire.state = QuestionnaireState.Finished;
+              this.questionnaires[this.selectedIndex] = Object.assign({}, this.selectedQuestionnaire);
+              this.cd.detectChanges();
+            }
+            
+          },
+          error => console.log(error)
+        );
+        }
     }
    
 

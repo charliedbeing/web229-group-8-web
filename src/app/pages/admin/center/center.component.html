@@ -23,11 +23,13 @@
             </div>
         </div>
          <div class="panel panel-default">
-            <div class="panel-heading">Questionnaire</div>
+            <div class="panel-heading">Questionnaire Management: </div>
             <div class="panel-body">
                 <survey-controls [questionnaire]="selectedQuestionnaire"
                     (deleteQuestionnaire)="onDeleteQuestionnaire()" 
-                    (publishQuestionnaire)="onPublishQuestionnaire()"></survey-controls>
+                    (publishQuestionnaire)="onPublishQuestionnaire()"
+                    (closeQuestionnaire)="onCloseQuestionnaire()"
+                    ></survey-controls>
             </div>
         </div>
     </div>

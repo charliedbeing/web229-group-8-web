@@ -13,7 +13,15 @@
         <td>{{questionnaire.questionList?.length}}</td>
     </tr>
     <tr>
+        <td>Questionnaire Answers amount：</td>
+        <td>{{questionnaireAnswerAmount}}</td>
+    </tr>
+    <tr>
         <td>Create Time：</td>
-        <td>{{questionnaire.createDate}}</td>
+        <td>{{questionnaire.createDate | date}}</td>
+    </tr>
+    <tr>
+        <td>Questionnaire State:</td>
+        <td>{{questionnaire.state | stateString}}</td>
     </tr>
 </table>

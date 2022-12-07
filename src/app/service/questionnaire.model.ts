@@ -8,7 +8,7 @@ export class QuestionnaireModel{
     ending!:String;  
     state?:QuestionnaireState; 
     questionList?: QuestionModel[];  
-    createDate?:String; 
+    createDate?:Date; 
     expireDate?:String;
     collectionData!: QuestionModel[][];
 

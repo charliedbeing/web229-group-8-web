@@ -33,7 +33,7 @@ export class EditComponent implements OnInit {
       state:QuestionnaireState.Created,
       questionList:[],
       userId: userService.getCurrentUser()['id'],
-      createDate:new Date().toISOString(),
+      createDate:new Date(),
       collectionData:[],
     }
   }
