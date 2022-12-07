@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class QuestionnairService {
  
   //https://web-229-group-9-server.herokuapp.com
-  REST_API: string = 'http://localhost:8000/questionnaire-api';
+  REST_API: string = 'https://web-229-group-9-server.herokuapp.com/questionnaire-api';
 
   // Http Header
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');

@@ -14,7 +14,7 @@ import {
 export class SurveyCrudService {
   //https://web-229-group-9-server.herokuapp.com
   // http://localhost:8000/questionnaire-api
-  REST_API: string = 'http://localhost:8000/survey-api';
+  REST_API: string = 'https://web-229-group-9-server.herokuapp.com/survey-api';
 
   // Http Header
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
