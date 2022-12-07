@@ -3,7 +3,7 @@ import { QuestionnairService} from '../../../service/questionnair.service';
 import { QuestionnaireModel,QuestionnaireState } from '../../../service/questionnaire.model';
 import { Router } from '@angular/router';
 import { PreviousRouteServiceService} from '../../../service/previous-route-service.service';
-
+import { AuthService } from '../../../shared/auth.service';
 @Component({
   selector: 'app-center',
   templateUrl: './center.component.html',
@@ -20,7 +20,8 @@ export class CenterComponent implements OnInit ,OnChanges{
     private cd:ChangeDetectorRef,
     private questionnaireService: QuestionnairService,
     private router: Router,
-    private preurlService:PreviousRouteServiceService
+    private preurlService:PreviousRouteServiceService,
+    private userService:AuthService,
 
   ) {
     this.selectedQuestionnaire = new QuestionnaireModel();
@@ -30,13 +31,30 @@ export class CenterComponent implements OnInit ,OnChanges{
 
 
 
-    this.questionnaireService.GetQuestionnaires().subscribe((res) => {
+    // this.questionnaireService.GetQuestionnaires().subscribe((res) => {
+    //   if(res.length === 0){
+    //     this.isEmpty = true;
+    //     return
+    //   }
+
+    //   this.isEmpty =false;
+    //   this.questionnaires = res;
+    //   let id = this.preurlService.getPreviousUrl().split("/")[2];
+    //   this.selectedQuestionnaire = this.questionnaires[this.getId(id)];
+    //   this.selectedIndex = 0;
+
+    // });
+
+    let userId = this.userService.getCurrentUserID();
+    
+    this.questionnaireService.GetQuestionnairesByUserId(userId).subscribe((res) => {
     
 
       if(res.length === 0){
         this.isEmpty = true;
         return
       }
+
       this.isEmpty =false;
       this.questionnaires = res;
       let id = this.preurlService.getPreviousUrl().split("/")[2];
@@ -44,7 +62,6 @@ export class CenterComponent implements OnInit ,OnChanges{
       this.selectedIndex = 0;
 
     });
-
 
     
 
@@ -117,7 +134,7 @@ export class CenterComponent implements OnInit ,OnChanges{
       }
     }
 
-    onCloseQuestionnaire(){
+  onCloseQuestionnaire(){
 
       if(this.selectedQuestionnaire!= undefined){
         this.selectedQuestionnaire.state = QuestionnaireState.Finished;

@@ -44,8 +44,8 @@ export class PublishedComponent implements OnInit {
   onSubmitQuestionniare(questionnaire: QuestionnaireModel) {
     //Save Questionnaire or collection survey data
 
-    console.log("is include answers?");
-    console.log(this.questionnaire.state);
+    // console.log("is include answers?");
+    // console.log(this.questionnaire.state);
 
 
       if (this.id && this.id !== '0') {
@@ -114,7 +114,7 @@ export class PublishedComponent implements OnInit {
   }
 
   onBack():void {
-    console.log('back');
+  //  console.log('back');
 
     this.location.back();
   }

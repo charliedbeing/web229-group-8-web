@@ -20,6 +20,10 @@ export class QuestionnaireComponent implements OnInit {
   submitAvailable:boolean =false;
   submitName:string="Submit";
 
+  constructor(private userService:AuthService,){
+
+  }
+
   ngOnInit() {
     this.editable = false;
     this.questionnaire = this.questionnaire || {
@@ -29,22 +33,18 @@ export class QuestionnaireComponent implements OnInit {
       ending:'',
       state:QuestionnaireState.Created,
       questionList:[],
-      userId: '',
+      userId: this.userService.getCurrentUserID(),
       createDate:new Date(),
       collectionData:[],
     }
 
      this.editable = this.questionnaire && this.questionnaire.state === QuestionnaireState.Created;
-     
-    if(this.questionnaire){
-      this.questionnaire.userId= "";
-    }
-   
+
   }
 
   ngOnChanges(){
     if(this.questionnaire){
-      console.log(this.questionnaire.questionList);
+      console.log(this.questionnaire);
     }
 
     //Edit Questionnaire Structure Submit
@@ -74,7 +74,7 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   onSubmit() {
-      console.log(this.questionnaire);
+    //  console.log(this.questionnaire);
       this.submitQuestionnaire.emit(this.questionnaire);
   }
 

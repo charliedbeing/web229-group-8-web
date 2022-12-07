@@ -38,6 +38,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PublishedComponent } from './published/published.component';
 
 import { StateStringPipe } from './../service/state.pipe';
+import { AnswersComponent } from './answers/answers.component';
 
 @NgModule({   
   imports:[CommonModule,BrowserModule,FormsModule,PartialsModule,
@@ -78,6 +79,7 @@ import { StateStringPipe } from './../service/state.pipe';
     QuestionSelectComponent,
     EditComponent,
     PublishedComponent,
+    AnswersComponent,
 
   ],
   exports: [

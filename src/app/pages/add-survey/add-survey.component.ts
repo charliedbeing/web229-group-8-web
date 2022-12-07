@@ -33,7 +33,7 @@ export class AddSurveyComponent implements OnInit {
   onSubmit(): any {
     this.crudService.AddSurvey(this.surveyForm.value).subscribe(
       () => {
-        console.log('Data added successfully!');
+       // console.log('Data added successfully!');
     
         this.ngZone.run(() => this.router.navigateByUrl('/survey-list'));
       },

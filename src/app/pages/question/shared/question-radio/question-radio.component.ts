@@ -59,7 +59,7 @@ export class QuestionRadioComponent extends QuestionComponent implements OnInit{
     let selected = this.question?.answer.selected;
     let index:number = selected.indexOf(value);
 
-    console.log(index);
+   // console.log(index);
 
 }
 

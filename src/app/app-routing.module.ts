@@ -20,6 +20,7 @@ import { CenterComponent }from './pages/admin/center/center.component';
 import { EditComponent } from './pages/admin/edit/edit.component';
 
 import { PublishedComponent} from './pages/published/published.component';
+import { AnswersComponent } from './pages/answers/answers.component';
 
 
 const routes: Routes = [
@@ -52,7 +53,11 @@ const routes: Routes = [
   {
     path: 'published/:id',
     component: PublishedComponent
-}
+  },
+  {
+    path: 'answer/:id',
+    component: AnswersComponent
+  }
 
 ];
 

@@ -42,7 +42,7 @@ export class SurveyDetailComponent implements OnInit {
   onUpdate(): any {
     this.crudService.updateSurvey(this.getId, this.updateForm.value).subscribe(
       () => {
-        console.log('Data updated successfully!');
+      //  console.log('Data updated successfully!');
         this.ngZone.run(() => this.router.navigateByUrl('/survey-list'));
       },
       (err) => {

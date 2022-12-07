@@ -17,13 +17,13 @@ export class SurveyListComponent implements OnInit {
 
   ngOnInit(): void {
     this.crudService.GetSurveys().subscribe((res) => {
-      console.log(res);
+     // console.log(res);
       this.Surveys = res;
     });
   }
 
   delete(id: any, i: any) {
-    console.log(id);
+   // console.log(id);
     if (window.confirm('Do you want to go ahead? Plese log in first')) {
       if(this.authService.isLoggedIn){
         this.crudService.deleteSurvey(id).subscribe((res) => {

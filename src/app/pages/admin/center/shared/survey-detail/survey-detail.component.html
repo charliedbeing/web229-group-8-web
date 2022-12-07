@@ -14,7 +14,10 @@
     </tr>
     <tr>
         <td>Questionnaire Answers amount：</td>
-        <td>{{questionnaireAnswerAmount}}</td>
+        <td>{{questionnaireAnswerAmount}}
+            <span><button *ngIf="canData" (click)="onShowAnswer()" class="btn btn-link">See Data</button></span>
+            
+        </td>
     </tr>
     <tr>
         <td>Create Time：</td>

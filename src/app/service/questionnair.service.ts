@@ -23,8 +23,8 @@ export class QuestionnairService {
   AddQuestionnair(data: QuestionnaireModel): Observable<any> {
     let API_URL = `${this.REST_API}/add-questionnaire`;
 
-    console.log('--to -server--- ');
-    console.log(data);
+    // console.log('--to -server--- ');
+    // console.log(data);
 
     
     delete data._id;
@@ -42,6 +42,15 @@ export class QuestionnairService {
       catchError(this.handleError)
     );
   }
+
+    // Get all objects by userId
+    GetQuestionnairesByUserId(userId:any) {
+      return this.httpClient.get(`${this.REST_API}/questionnaires/${userId}`)
+      .pipe(
+        map((res:any)=><QuestionnaireModel[]> res),
+        catchError(this.handleError)
+      );
+    }
 
   // Get single object
   GetQuestionnaireById(id: any): Observable<any> {
@@ -65,7 +74,7 @@ export class QuestionnairService {
    // Update
    updateQuestionnaireState(id: any, data: any): Observable<any> {
 
-    console.log(data);
+    //console.log(data);
 
 
     let API_URL = `${this.REST_API}/questionnaire/${id}`;

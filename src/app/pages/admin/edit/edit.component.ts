@@ -32,10 +32,12 @@ export class EditComponent implements OnInit {
       ending:'',
       state:QuestionnaireState.Created,
       questionList:[],
-      userId: userService.getCurrentUser()['id'],
+      userId: this.userService.getCurrentUserID(),
       createDate:new Date(),
       collectionData:[],
     }
+
+
   }
 
   ngOnInit(): void {

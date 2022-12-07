@@ -19,7 +19,10 @@ export class AuthService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser:User = {};
 
-  constructor(private http: HttpClient, public router: Router) {}
+
+  constructor(private http: HttpClient, public router: Router) {
+
+  }
 
   // Sign-up
   signUp(user: User): Observable<any> {
@@ -33,12 +36,17 @@ export class AuthService {
       .post<any>(`${this.endpoint}/signin`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
-        this.router.navigate(['survey-list/']);
-        
-        this.getUserProfile(res._id).subscribe((res) => {
-          this.currentUser = res;
-          // this.router.navigate(['survey-list/']);
-        });
+        this.router.navigate(['admin/center']);
+        localStorage.setItem('user_id',res._id);
+     
+
+        // this.getUserProfile(res._id).subscribe((res) => {
+        //   this.currentUser = res;
+
+        //   console.log(this.currentUser);
+
+        //   // this.router.navigate(['survey-list/']);
+        // });
 
       });
   }
@@ -46,6 +54,16 @@ export class AuthService {
   getCurrentUser(){
     return this.currentUser;
   }  
+
+  getCurrentUserID():string{
+
+    let restul:string ="";
+    let temp = localStorage.getItem('user_id');
+    if( temp!=null){
+      restul = temp;
+    }
+    return restul;
+  }
 
   getToken() {
     return localStorage.getItem('access_token');
