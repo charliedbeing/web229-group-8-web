@@ -1,7 +1,9 @@
 import { Component, OnInit,Input,Output,EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuestionnaireModel} from '../../../../../service/questionnaire.model';
-
+import { v4 as uuidv4 } from 'uuid';
+import { OnlyOneService } from '../../../../../service/only-one.service';
+import { OnlyOne }from '../../../../../service/only-one.model';
 @Component({
   selector: 'survey-controls',
   templateUrl: './survey-controls.component.html',
@@ -18,7 +20,7 @@ export class SurveyControlsComponent implements OnInit ,OnChanges{
   canAnswer:boolean|undefined = false;
   canPreview:boolean|undefined = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private onlyOneServer: OnlyOneService) {
 
    }
 
@@ -68,6 +70,22 @@ export class SurveyControlsComponent implements OnInit ,OnChanges{
 
   onClose(){
     this.closeQuestionnaire.emit();
+  }
+
+  onPublic(){
+    this.publishQuestionnaire.emit();
+    //this.router.navigateByUrl('public/' + this.questionnaire._id);
+    let onlyOne = uuidv4();
+    console.log(onlyOne);
+    let one = new OnlyOne();
+    one.answerUUID =onlyOne;
+    one.isAnswer =false;
+    this.onlyOneServer.addOnlyOne(one).subscribe(res=>{
+
+      this.router.navigate(['public/',this.questionnaire._id,  onlyOne]);
+      
+    })
+   
   }
 
 }

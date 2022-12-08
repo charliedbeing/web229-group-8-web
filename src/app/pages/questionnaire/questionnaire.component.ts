@@ -14,6 +14,7 @@ export class QuestionnaireComponent implements OnInit {
   @Input() questionnaire: QuestionnaireModel|undefined;
   @Output() submitQuestionnaire = new EventEmitter();
   @Output() questionnaireChange =new EventEmitter<QuestionnaireModel>()
+  @Input() submitFromPublic: boolean|undefined;
 
 
   editable: boolean = false;
@@ -21,7 +22,7 @@ export class QuestionnaireComponent implements OnInit {
   submitName:string="Submit";
 
   constructor(private userService:AuthService,){
-
+ 
   }
 
   ngOnInit() {
@@ -56,6 +57,10 @@ export class QuestionnaireComponent implements OnInit {
         if(this.questionnaire.state ==1){
           this.submitAvailable = true;
           this.submitName ="Collect Data Submit";
+        }
+
+        if(this.submitFromPublic == true){
+          this.submitAvailable = false;
         }
       }
 

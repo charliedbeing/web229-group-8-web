@@ -23,6 +23,12 @@
             <span class="control-text">Publish</span>
         </button>
     </div> 
+    <div class="col-lg-3" *ngIf="canAnswer">
+        <button type="button" class="btn btn-default btn-lg" (click)="onPublic()">
+            <span class="bi bi-airplane"></span>
+            <span class="control-text">Public</span>
+        </button>
+    </div> 
     <div class="col-lg-3" *ngIf="questionnaire.state==1">
         <button type="button" class="btn btn-default btn-lg" (click)="onClose()">
             <span class="bi bi-bookmark-x"></span>

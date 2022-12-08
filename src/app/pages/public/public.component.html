@@ -1,0 +1,6 @@
+
+<div class = "published-container">
+    <p>{{result}}</p>
+    <button style="margin-top: 50px;" class="btn btn-link" (click)="onBack()">Return</button>
+    <questionnaire [submitFromPublic]="once" [(questionnaire)] = "questionnaire" (submitQuestionnaire)="onSubmitQuestionniare($event)"></questionnaire>
+</div>
