@@ -50,6 +50,7 @@ export class QuestionnaireComponent implements OnInit {
 
     //Edit Questionnaire Structure Submit
       if(this.questionnaire != undefined){
+       
         if(this.questionnaire.state ==0){
           this.submitAvailable = true;
           this.submitName ="Edit Questionnaire Submit";
@@ -62,6 +63,11 @@ export class QuestionnaireComponent implements OnInit {
         if(this.submitFromPublic == true){
           this.submitAvailable = false;
         }
+
+        if(this.questionnaire.state ==3){
+          this.submitAvailable = false;
+        }
+
       }
 
     // collect data submit 

@@ -32,15 +32,15 @@ ngOnInit(): void {
 setState(){
   switch(this.questionnaire?.state){
       case QuestionnaireState.Created:
-        this.stateText = '已创建';
+        this.stateText = 'created';
         this.stateClass = 'label-warning';
         break;
     case QuestionnaireState.Published:
-        this.stateText = '回收中';
+        this.stateText = 'published';
         this.stateClass = 'label-info';
         break;
     case QuestionnaireState.Finished:
-        this.stateText = '已结束';
+        this.stateText = 'finished';
         this.stateClass = 'label-success';
         break;
     default:

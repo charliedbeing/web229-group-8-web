@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { QuestionnaireModel} from '../../../../../service/questionnaire.model';
 import { v4 as uuidv4 } from 'uuid';
 import { OnlyOneService } from '../../../../../service/only-one.service';
+import { AuthService } from '../../../../../shared/auth.service';
 import { OnlyOne }from '../../../../../service/only-one.model';
 @Component({
   selector: 'survey-controls',
@@ -19,8 +20,10 @@ export class SurveyControlsComponent implements OnInit ,OnChanges{
 
   canAnswer:boolean|undefined = false;
   canPreview:boolean|undefined = false;
-
-  constructor(private router: Router, private onlyOneServer: OnlyOneService) {
+  isNotExpire:boolean|undefined = true;
+  constructor(private router: Router,
+     private onlyOneServer: OnlyOneService,
+     private userService:AuthService) {
 
    }
 
@@ -31,20 +34,35 @@ export class SurveyControlsComponent implements OnInit ,OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    if(this.questionnaire.state == 0){
+    if(this.questionnaire.expireDate !=undefined && this.questionnaire.createDate != undefined){
+      let now = Date.parse(new Date().toDateString());
+      let expire = Date.parse(this.questionnaire.expireDate.toString());
+
+      if(now > expire){
+        this.isNotExpire = false;
+        this.canPreview= true;
+        this.questionnaire.state =3;
+      }
+    }
+
+    if(this.questionnaire.state == 0 && this.isNotExpire){
       this.canAnswer =false;
       this.canPreview = true;
     }
 
-    if(this.questionnaire.state == 1){
+    if(this.questionnaire.state == 1 && this.isNotExpire){
       this.canAnswer =true;
       this.canPreview = false;
     }
-      
+    
     if(this.questionnaire.state == 2){
       this.canAnswer =false;
       this.canPreview = true;
     }
+
+
+
+   
       
   }
 
@@ -80,9 +98,16 @@ export class SurveyControlsComponent implements OnInit ,OnChanges{
     let one = new OnlyOne();
     one.answerUUID =onlyOne;
     one.isAnswer =false;
+    if(this.questionnaire._id !=undefined){
+      one.questionnaireID = this.questionnaire._id;
+    }
+    one.userID = this.userService.getCurrentUserID();
+
     this.onlyOneServer.addOnlyOne(one).subscribe(res=>{
 
       this.router.navigate(['public/',this.questionnaire._id,  onlyOne]);
+
+
       
     })
    

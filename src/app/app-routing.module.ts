@@ -22,6 +22,7 @@ import { EditComponent } from './pages/admin/edit/edit.component';
 import { PublishedComponent} from './pages/published/published.component';
 import { AnswersComponent } from './pages/answers/answers.component';
 import { PublicComponent } from './pages/public/public.component';
+import { ReadySurveyComponent } from './pages/ready-survey/ready-survey.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'log-in', component: SigninComponent },
   { path: 'sign-up', component: SignupComponent },
   { path: 'public/:id/:token', component: PublicComponent },
+  { path: 'readySurvey', component: ReadySurveyComponent},
   
   {
     path:'admin',

@@ -3,16 +3,16 @@
     <div class="questionnaire">
         <h1 *ngIf="!editable" class="text-center">{{questionnaire.title}}</h1>
         <h1 *ngIf="editable" class="text-center">
-            <input placeholder="Questionnaire Title" class="form-control" [(ngModel)]="questionnaire.title"/>
+            <input  placeholder="Questionnaire Title" class="form-control" [(ngModel)]="questionnaire.title"/>
         </h1>
         <p *ngIf="!editable" class="text-center">{{questionnaire.starter}}</p>
         <p *ngIf="editable" class="text-center">
-            <input placeholder="Welcome content" class="form-control" [(ngModel)]="questionnaire.starter"/>
+            <input  placeholder="Welcome content" class="form-control" [(ngModel)]="questionnaire.starter"/>
         </p>
         <ul>
             <li *ngFor="let q of questionnaire.questionList; let i=index" [ngSwitch]="q.type">
                 <label>The {{i+1}} Question：</label>
-                <div *ngSwitchCase="0">
+                <div style="width: 70%; display: inline"  *ngSwitchCase="0">
                     <question-text [question]="q" [editable]="editable" (deleteQuestionRequest)="onDeleteQuestion(i)"></question-text>
                 </div>
                 <div *ngSwitchCase="1">
@@ -26,10 +26,22 @@
                 </div>
             </li>
         </ul>
+
+        <p *ngIf="!editable" class="text-center">{{questionnaire.expireDate}}</p>
+        <div *ngIf="editable" class="text-center">
+           <span>
+            <label style="width: 5%;margin-left: -80px; display: inline" for="expireDate"> Expire Date:</label>
+            <input style="width: 80%; display: inline" id="expireDate" placeholder="Expire Date"   type="datetime-local"  class="form-control" [(ngModel)]="questionnaire.expireDate"/>
+         </span>
+   
+        </div>
+
         <p *ngIf="!editable" class="text-center">{{questionnaire.ending}}</p>
-        <p *ngIf="editable" class="text-center">
-            <input placeholder="End Thanking Content" class="form-control" [(ngModel)]="questionnaire.ending"/>
+
+        <p *ngIf="editable" class="text-center">        
+            <input   placeholder="End Thanking Content" class="form-control" [(ngModel)]="questionnaire.ending"/>
         </p>
+
     </div>
     <div class="text-center"> 
     <button type="button" class="btn btn-primary" [style.display]=" ! submitAvailable ? 'none':'inline'" 

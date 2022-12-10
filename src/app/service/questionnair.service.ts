@@ -11,7 +11,9 @@ import { Router } from '@angular/router';
 })
 export class QuestionnairService {
  
-  //https://web-229-group-9-server.herokuapp.com
+  //https://web-229-group-8-server.herokuapp.com
+  //http://localhost:8000
+
   REST_API: string = 'https://web-229-group-8-server.herokuapp.com/questionnaire-api';
 
   // Http Header
@@ -42,6 +44,14 @@ export class QuestionnairService {
       catchError(this.handleError)
     );
   }
+  GetQuestionnairesForPublic() {
+    return this.httpClient.get(`${this.REST_API}/questionnairesPublic`)
+    .pipe(
+      map((res:any)=><QuestionnaireModel[]> res),
+      catchError(this.handleError)
+    );
+  }
+
 
     // Get all objects by userId
     GetQuestionnairesByUserId(userId:any) {

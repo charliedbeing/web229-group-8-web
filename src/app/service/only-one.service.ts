@@ -3,6 +3,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { OnlyOne } from './only-one.model'
 
+
 import {
   HttpClient,
   HttpHeaders,
@@ -18,7 +19,8 @@ export class OnlyOneService {
     // http://localhost:8000/questionnaire-api
     //'https://web-229-group-8-server.herokuapp.com/survey-api'
     // 'http://localhost:8000/answer-api'
-    REST_API: string = 'https://web-229-group-8-server.herokuapp.com/answer-api';
+
+    REST_API: string = 'https://web-229-group-8-server.herokuapp.com/survey-api/answer-api';
 
     httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -32,6 +34,45 @@ export class OnlyOneService {
       .post(API_URL, data)
       .pipe(catchError(this.handleError));
   }
+
+  getPublicQuestionnaire(ids:string[]){
+    let API_URL = `${this.REST_API}/onlyones`;
+    return this.httpClient
+      .post(API_URL,ids,{ headers: this.httpHeaders }).pipe(
+        map((res: any) => <OnlyOne[]> res),
+        catchError(this.handleError)
+        );
+  }
+
+
+  getPublicQuestionnaire_bak(){
+    let API_URL = `${this.REST_API}/onlyones`;
+    return this.httpClient
+      .get(API_URL,{ headers: this.httpHeaders }).pipe(
+        map((res: any) => <OnlyOne[]> res),
+        catchError(this.handleError)
+        );
+  }
+
+  getPublicQuestionnaireByUserId(userId:string){
+    let API_URL = `${this.REST_API}/onlyones/${userId}`;
+    return this.httpClient
+      .get(API_URL,{ headers: this.httpHeaders }).pipe(
+        map((res: any) => <OnlyOne[]> res),
+        catchError(this.handleError)
+        );
+  }
+
+
+    // // Get all objects by userId
+    // GetQuestionnairesByUserId(userId:any) {
+    //   return this.httpClient.get(`${this.REST_API}/questionnaires/${userId}`)
+    //   .pipe(
+    //     map((res:any)=><QuestionnaireModel[]> res),
+    //     catchError(this.handleError)
+    //   );
+    // }
+
 
 
   checkIsAnswer(uudi: string): Observable<any> {

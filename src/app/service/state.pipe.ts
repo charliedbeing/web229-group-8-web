@@ -23,6 +23,9 @@ export class StateStringPipe implements PipeTransform {
         if(value ==2){
             result ="Closed,edit[NO],answer[NO]"
         }
+        if(value ==3){
+          result ="Expired,edit[NO],answer[NO]"
+      }
     }
    
     return result;

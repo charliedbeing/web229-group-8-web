@@ -40,6 +40,7 @@ import { PublishedComponent } from './published/published.component';
 import { StateStringPipe } from './../service/state.pipe';
 import { AnswersComponent } from './answers/answers.component';
 import { PublicComponent } from './public/public.component';
+import { ReadySurveyComponent } from './ready-survey/ready-survey.component';
 
 @NgModule({   
   imports:[CommonModule,BrowserModule,FormsModule,PartialsModule,
@@ -82,6 +83,7 @@ import { PublicComponent } from './public/public.component';
     PublishedComponent,
     AnswersComponent,
     PublicComponent,
+    ReadySurveyComponent,
 
   ],
   exports: [

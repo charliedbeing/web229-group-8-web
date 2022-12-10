@@ -6,24 +6,24 @@
         </button>
     </div>
     <div class="col-lg-3">
-        <button type="button" *ngIf="canAnswer" class="btn btn-default btn-lg" (click)="onPreview()">
+        <button type="button" *ngIf="canAnswer && isNotExpire" class="btn btn-default btn-lg" (click)="onPreview()">
             <i class="bi bi-search"></i>
             <span class="control-text">Answer </span>
         </button>
     </div>
-    <div class="col-lg-3" *ngIf="questionnaire.state==0">
+    <div class="col-lg-3" *ngIf="questionnaire.state==0 && isNotExpire">
         <button type="button" class="btn btn-default btn-lg" (click)="onEdit()">
             <i class="bi bi-pencil"></i>
             <span class="control-text">Edit</span>
         </button>
     </div>
-    <div class="col-lg-3" *ngIf="questionnaire.state==0">
+    <div class="col-lg-3" *ngIf="questionnaire.state==0 && isNotExpire">
         <button type="button" class="btn btn-default btn-lg" (click)="onPublish()">
             <span class="bi bi-airplane"></span>
             <span class="control-text">Publish</span>
         </button>
     </div> 
-    <div class="col-lg-3" *ngIf="canAnswer">
+    <div class="col-lg-3" *ngIf="canAnswer && isNotExpire">
         <button type="button" class="btn btn-default btn-lg" (click)="onPublic()">
             <span class="bi bi-airplane"></span>
             <span class="control-text">Public</span>

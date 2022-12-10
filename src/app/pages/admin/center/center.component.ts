@@ -4,6 +4,7 @@ import { QuestionnaireModel,QuestionnaireState } from '../../../service/question
 import { Router } from '@angular/router';
 import { PreviousRouteServiceService} from '../../../service/previous-route-service.service';
 import { AuthService } from '../../../shared/auth.service';
+import { Observable ,forkJoin } from 'rxjs';
 @Component({
   selector: 'app-center',
   templateUrl: './center.component.html',
@@ -29,24 +30,10 @@ export class CenterComponent implements OnInit ,OnChanges{
 
   ngOnInit(): void {
 
-
-
-    // this.questionnaireService.GetQuestionnaires().subscribe((res) => {
-    //   if(res.length === 0){
-    //     this.isEmpty = true;
-    //     return
-    //   }
-
-    //   this.isEmpty =false;
-    //   this.questionnaires = res;
-    //   let id = this.preurlService.getPreviousUrl().split("/")[2];
-    //   this.selectedQuestionnaire = this.questionnaires[this.getId(id)];
-    //   this.selectedIndex = 0;
-
-    // });
-
     let userId = this.userService.getCurrentUserID();
     
+    let all:Observable<any>[] = [];
+
     this.questionnaireService.GetQuestionnairesByUserId(userId).subscribe((res) => {
     
 
@@ -57,15 +44,40 @@ export class CenterComponent implements OnInit ,OnChanges{
 
       this.isEmpty =false;
       this.questionnaires = res;
-      let id = this.preurlService.getPreviousUrl().split("/")[2];
-      this.selectedQuestionnaire = this.questionnaires[this.getId(id)];
-      this.selectedIndex = 0;
 
-    });
+      all = this.checkExpireDate(res,all);
+
+      forkJoin(all).subscribe(res=>{
+          let id = this.preurlService.getPreviousUrl().split("/")[2];
+          this.selectedQuestionnaire = this.questionnaires[this.getId(id)];
+          this.selectedIndex = 0;
+  
+      })
 
     
+    });
+  }
+
+  private checkExpireDate(qs:QuestionnaireModel[],batch:Observable<any>[] ):Observable<any>[]{
+
+    for(var i=0;i < qs.length; i++){
+       var q = qs[i];
+       if(q.state && q.state < 3){
+        if(q.expireDate !=undefined && q.createDate != undefined){
+          let now = Date.parse(new Date().toDateString());
+          let expire = Date.parse(q.expireDate.toString());
+    
+          if(now > expire){
+            q.state =3;
+            batch.push(this.questionnaireService.updateQuestionnaireState(q._id,q));
+          }
+        }
+       }
+    }
+    return batch;
 
   }
+
 
   private getId(id:string):number{
     let result =0;
@@ -101,7 +113,7 @@ export class CenterComponent implements OnInit ,OnChanges{
       .subscribe(
           res => {
             this.questionnaires.splice(this.selectedIndex, 1);
-            //全部删除
+            //delete all
             if(this.questionnaires.length === 0){
               this.isEmpty = true;
             } else {

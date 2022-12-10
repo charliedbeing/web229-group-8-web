@@ -86,7 +86,7 @@ export class EditComponent implements OnInit {
   }
 
   onSubmitQuestionniare(questionnaire: QuestionnaireModel) {
-    //保存问卷或回收答案
+    //save questionniare structure or collecte data
     let ref = this;
     if (questionnaire.state == QuestionnaireState.Created) {
       if (this.id && this.id !== '0') {
@@ -102,7 +102,7 @@ export class EditComponent implements OnInit {
           }
          ); 
       } else {
-        //create new 
+        //create new
         this.questionnaireService.AddQuestionnair(questionnaire)
         .subscribe(
           {
