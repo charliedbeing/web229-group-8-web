@@ -28,6 +28,7 @@ import { HomeAndAbout } from './service/static.content';
 
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, data: { title: new HomeAndAbout().getHome()} },
   { path: 'about', component: AboutComponent, data: { title: new HomeAndAbout().getAbout() } },
   { path: 'contact', component: ContactComponent, data: { title: 'Contact'  } },
