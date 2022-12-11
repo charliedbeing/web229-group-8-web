@@ -15,6 +15,8 @@ export class ReadySurveyComponent implements OnInit {
 
   questionnaireIDToPublic:string[] =[];
 
+  questionnaireIDAndTitleToPublic:{id:string,title:string}[] =[];
+
   constructor(private onlyOneService:OnlyOneService,
      private route: ActivatedRoute,
      private questionnaireService:QuestionnairService
@@ -24,15 +26,17 @@ export class ReadySurveyComponent implements OnInit {
 
 
   publicQuestions :OnlyOne[] = [];
-  linkString:string[]=[];
+  linkTitleString:{link:string, title:string}[]=[];
 
   ngOnInit(): void {
 
     this.questionnaireService.GetQuestionnairesForPublic().subscribe(res=>{
         for(let i=0;i<res.length;i++){
-           let temp =res[i]._id;
-          if(temp != undefined){
-            this.questionnaireIDToPublic.push(temp);
+           let id =res[i]._id;
+           let title = res[i].title;
+          if(id != undefined){
+            this.questionnaireIDAndTitleToPublic.push({id,title});
+            this.questionnaireIDToPublic.push(id);
           }      
         }
         if(this.questionnaireIDToPublic.length >0){
@@ -48,14 +52,24 @@ export class ReadySurveyComponent implements OnInit {
             for(var j=0;j < this.publicQuestions.length; j++){
               let one = this.publicQuestions[j];
               let link = 'public/'+one.questionnaireID+'/'+one.answerUUID;
-              this.linkString.push(link);
+              let title = this.getTitle(this.questionnaireIDAndTitleToPublic,one.questionnaireID);
+              this.linkTitleString.push({link, title});
             }
          });
       
         }
     })
+  }
 
-
+  private getTitle(arr:{id:string,title:string}[], id:string):string{
+        let result ='';
+        for(let i=0;i<arr.length; i++){
+          if(arr[i].id == id){
+            result = arr[i].title;
+            break;
+          }
+        }
+        return result;
   }
 
 

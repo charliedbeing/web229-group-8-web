@@ -1,3 +1,21 @@
-<ul>
+<!-- <ul>
     <li *ngFor="let p of linkString"><a href= {{p}} >{{p}}</a></li>
-</ul>
+</ul> -->
+<div style="margin: 50px;">
+    <h2>These are public survey, you can choose to answer!</h2>
+    <table class="table"> 
+        <thead>
+            <tr>
+                <th scope="col">Questionnaire Title</th>
+                <th scope="col">Click to Answer</th>
+            </tr>
+        </thead>
+       <tbody>
+        <tr *ngFor="let p of linkTitleString">
+            <td>{{p.title}}</td>
+            <td><a href= {{p.link}} >{{p.link}}</a></td>
+        </tr>
+       </tbody>
+      
+    </table>
+</div>

@@ -3,6 +3,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { QuestionnairService } from '../../service/questionnair.service';
 import { QuestionnaireModel,QuestionnaireState } from '../../service/questionnaire.model';
 import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-answers',
@@ -14,14 +15,22 @@ export class AnswersComponent implements OnInit {
 
   id:string ;
   data: Object;
+  downloadJsonHref:any;
 
   constructor(private activatedRoute:ActivatedRoute,
     private questionnaireService :QuestionnairService,
-    private location: Location
+    private location: Location,
+    private sanitizer: DomSanitizer
     ) { 
     this.id="";
     this.data =[];
   }
+
+  generateDownloadJsonUri() {
+    var theJSON = JSON.stringify(this.data);
+    var uri = this.sanitizer.bypassSecurityTrustUrl("data:text/json;charset=UTF-8," + encodeURIComponent(theJSON));
+    this.downloadJsonHref = uri;
+}
 
   ngOnInit(): void {
 
@@ -34,6 +43,10 @@ export class AnswersComponent implements OnInit {
           questionnaire =>{
        
             this.data = questionnaire.collectionData;
+
+            var theJSON = JSON.stringify(this.data);
+            var uri = this.sanitizer.bypassSecurityTrustUrl("data:text/json;charset=UTF-8," + encodeURIComponent(theJSON));
+            this.downloadJsonHref = uri;
  
           } ,
           error => console.log(error)

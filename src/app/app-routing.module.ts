@@ -24,11 +24,13 @@ import { AnswersComponent } from './pages/answers/answers.component';
 import { PublicComponent } from './pages/public/public.component';
 import { ReadySurveyComponent } from './pages/ready-survey/ready-survey.component';
 
+import { HomeAndAbout } from './service/static.content';
+
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, data: { title: 'Home' } },
-  { path: 'about', component: AboutComponent, data: { title: 'About' } },
-  { path: 'contact', component: ContactComponent, data: { title: 'Contact' } },
+  { path: 'home', component: HomeComponent, data: { title: new HomeAndAbout().getHome()} },
+  { path: 'about', component: AboutComponent, data: { title: new HomeAndAbout().getAbout() } },
+  { path: 'contact', component: ContactComponent, data: { title: 'Contact'  } },
   { path: 'survey', component: SurveyComponent, data: { title: 'Survey' } },
   { path: 'survey-list', component: SurveyListComponent },
   { path: 'add-survey', component: AddSurveyComponent,canActivate: [AuthGuard] },
