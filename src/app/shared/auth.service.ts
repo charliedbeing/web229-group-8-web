@@ -16,7 +16,10 @@ import { Router } from '@angular/router';
 export class AuthService {
   
   //https://web-229-group-8-server.herokuapp.com/auth
-  endpoint: string = 'https://web-229-group-8-server.herokuapp.com/auth';
+  //http://localhost:8000/auth
+  //https://web-229-group-8-server.herokuapp.com/auth
+  
+  endpoint: string = 'http://localhost:8000/auth';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser:User = {};
 

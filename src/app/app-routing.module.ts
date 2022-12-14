@@ -25,6 +25,8 @@ import { PublicComponent } from './pages/public/public.component';
 import { ReadySurveyComponent } from './pages/ready-survey/ready-survey.component';
 
 import { HomeAndAbout } from './service/static.content';
+import { AuthInterceptor } from './service/auth-interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 const routes: Routes = [
@@ -71,6 +73,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}],
 })
 export class AppRoutingModule { }
