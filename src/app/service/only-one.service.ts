@@ -20,7 +20,7 @@ export class OnlyOneService {
     //'https://web-229-group-8-server.herokuapp.com/answer-api'
     // 'http://localhost:8000/answer-api'
 
-    REST_API: string = 'http://localhost:8000/answer-api';
+    REST_API: string = 'https://web-229-group-8-server.herokuapp.com/answer-api';
 
     httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
